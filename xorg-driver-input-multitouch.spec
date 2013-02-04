@@ -7,6 +7,7 @@ Release:	0.rc2.%{subver}.%{rel}
 License:	GPL v2+
 Group:		X11/Applications
 Source0:	xf86-input-multitouch-%{subver}.tar.bz2
+# Source0-md5:	994e19532eb5561779cfa4f63dc0b077
 Source1:	xf86-input-multitouch.conf
 Patch0:		libdir.patch
 URL:		http://bitmath.org/code/multitouch/
