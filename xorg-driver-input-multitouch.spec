@@ -14,6 +14,7 @@ URL:		http://bitmath.org/code/multitouch/
 BuildRequires:	mtdev-devel >= 1.1.0
 BuildRequires:	pixman-devel
 BuildRequires:	sed >= 4.0
+BuildRequires:	xorg-xserver-server-devel
 %{?requires_xorg_xserver_xinput}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
