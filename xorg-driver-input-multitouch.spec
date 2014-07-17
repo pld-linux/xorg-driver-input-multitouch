@@ -1,5 +1,5 @@
 %define		subver 20110303
-%define		rel		2
+%define		rel		3
 Summary:	Multitouch X input driver
 Name:		xorg-driver-input-multitouch
 Version:	1.0
