@@ -24,7 +24,7 @@ touchpads, in particular those with integrated button.
 
 %prep
 %setup -q -n xf86-input-multitouch-%{subver}
-%patch0 -p1
+%patch -P0 -p1
 
 %{__sed} -i -e 's,gcc,$(CC),g' Makefile
 
