@@ -1,5 +1,5 @@
 %define		subver 20110303
-%define		rel		6
+%define		rel		7
 Summary:	Multitouch X input driver
 Name:		xorg-driver-input-multitouch
 Version:	1.0
@@ -10,6 +10,8 @@ Source0:	xf86-input-multitouch-%{subver}.tar.bz2
 # Source0-md5:	994e19532eb5561779cfa4f63dc0b077
 Source1:	xf86-input-multitouch.conf
 Patch0:		libdir.patch
+Patch1:		Include-headers-to-fix-implicit-function-declaration.patch
+Patch2:		Port-usage-of-struct-input_event-to-input_event_.patch
 URL:		http://bitmath.org/code/multitouch/
 BuildRequires:	mtdev-devel >= 1.1.0
 BuildRequires:	pixman-devel
@@ -25,6 +27,8 @@ touchpads, in particular those with integrated button.
 %prep
 %setup -q -n xf86-input-multitouch-%{subver}
 %patch -P0 -p1
+%patch -P1 -p1
+%patch -P2 -p1
 
 %{__sed} -i -e 's,gcc,$(CC),g' Makefile
 

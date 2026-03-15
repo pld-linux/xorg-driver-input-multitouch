@@ -1,0 +1,40 @@
+From: Benjamin Drung <benjamin.drung@canonical.com>
+Date: Mon, 15 Apr 2024 19:56:58 +0200
+Subject: Port usage of struct input_event to input_event_*
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+
+It fails to build on armhf:
+
+```
+src/hwstate.c: In function ‘finish_packet’:
+src/hwstate.c:43:24: error: ‘const struct input_event’ has no member named
+‘time’
+   43 | s->evtime = syn->time.tv_usec / ms + syn->time.tv_sec * ms;
+      | ^~
+src/hwstate.c:43:49: error: ‘const struct input_event’ has no member named
+‘time’
+   43 | s->evtime = syn->time.tv_usec / ms + syn->time.tv_sec * ms;
+      | ^~
+```
+
+Closes: #1067596
+LP: #2061591
+---
+ src/hwstate.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/hwstate.c b/src/hwstate.c
+index 076efa1..ab2ac48 100644
+--- a/src/hwstate.c
++++ b/src/hwstate.c
+@@ -40,7 +40,7 @@ static void finish_packet(struct HWState *s, const struct Capabilities *caps,
+ 		if (!caps->has_abs[MTDEV_WIDTH_MINOR])
+ 			s->data[i].width_minor = s->data[i].width_major;
+ 	}
+-	s->evtime = syn->time.tv_usec / ms + syn->time.tv_sec * ms;
++	s->evtime = syn->input_event_usec / ms + syn->input_event_sec * ms;
+ }
+ 
+ static int read_event(struct HWState *s, const struct Capabilities *caps,
